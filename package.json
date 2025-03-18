@@ -4,6 +4,8 @@
   "description": "introdução API NODES JS",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon  index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -15,13 +17,13 @@
   "author": "caique ",
   "license": "MIT",
   "dependencies": {
+    "android": "^0.0.8",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "mysql2": "^3.12.0",
-  
+    "run": "^1.5.0"
   },
-"devDependencies": {
-  "nodemon": "^3.1.9"
-}
-
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
 }
