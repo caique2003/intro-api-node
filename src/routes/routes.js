@@ -1,17 +1,17 @@
-const express = Require('express')
+const express = require('express')
 const router = express.Router();
 
 const mensagemController= require ('../controllers/mensagem');
-const mensagemController= require ('../controllers/pagamento');
+const pagamentoController= require ('../controllers/pagamento');
 
-router.get('/mensagem', mensagemController.listarmensagem);
-router.post('/mensagem', mensagemController.cadrastrarmensagem);
-router.patch('/mensagem', mensagemController.editarmensagem);
-router.delete('/mensagem', mensagemController.apagarmensagem);
+router.get('/mensagem', mensagemController.listarMensagem);
+router.post('/mensagem', mensagemController.cadastrarMensagem);
+router.patch('/mensagem', mensagemController.editarMensagem);
+router.delete('/mensagem', mensagemController.apagarMensagem);
 
-router.get('/pagamento', mensagemController.listarpagamento);
-router.post('/pagamento', mensagemController.cadrastrarpagamento);
-router.patch('/pagamento', mensagemController.editarpagamento);
-router.delete('/pagamento', mensagemController.apagarpagamento);
+router.get('/pagamento', pagamentoController.listarPagamento);
+router.post('/pagamento', pagamentoController.cadastrarPagamento);
+router.patch('/pagamento', pagamentoController.editarPagamento);
+router.delete('/pagamento', pagamentoController.apagarPagamento);
 
 module.exports = router;

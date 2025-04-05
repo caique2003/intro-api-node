@@ -1,82 +1,67 @@
 const db = require('../database/connection');
 
 module.exports = {
-   async listarContatos(request, response) {
-      try {
-         return response.status(200).json({
+    async listarPagamento(request, response) {
+        try {
+            return response.status(200).json({
+                sucesso: true,
+                mensagem: 'Lista de pagamentos',
+                dados: null
+            });
+        } catch (error) {
+            return response.status(500).json({
+                sucesso: false,
+                mensagem: 'Erro na listagem de pagamentos',
+                dados: error.message
+            });
+        }
+    },
 
-            sucesso: true,
-            pagamento: 'lista de pagamento',
-            dados: null
+    async cadastrarPagamento(request, response) {
+        try {
+            return response.status(200).json({
+                sucesso: true,
+                mensagem: 'Cadastro de pagamento realizado com sucesso',
+                dados: null
+            });
+        } catch (error) {
+            return response.status(500).json({
+                sucesso: false,
+                mensagem: 'Erro ao cadastrar pagamento',
+                dados: error.message
+            });
+        }
+    },
 
-         })
-      }
-      catch (error) {
-         return response.status(500).json({
-            sucesso: false,
-            pagamento: 'erro na lista de pagamento',
-            dados: error.message
-         })
-      }
-   },
+    async editarPagamento(request, response) {
+        try {
+            return response.status(200).json({
+                sucesso: true,
+                mensagem: 'Pagamento editado com sucesso',
+                dados: null
+            });
+        } catch (error) {
+            return response.status(500).json({
+                sucesso: false,
+                mensagem: 'Erro ao editar pagamento',
+                dados: error.message
+            });
+        }
+    },
 
-
-   async cadastarpagamento(request, response) {
-      try {
-         return response.status(200).json({
-
-            sucesso: true,
-            pagamento: 'cadastrar pagamento',
-            dados: null
-
-         })
-      }
-      catch (error) {
-         return response.status(500).json({
-            sucesso: false,
-            pagamento: 'erro na lista de pagamento',
-            dados: error.message
-         })
-      }
-   },
-
-
-   async editarpagamento(request, response) {
-      try {
-         return response.status(200).json({
-
-            sucesso: true,
-            pagamento: 'editar pagamento',
-            dados: null
-
-         })
-      }
-      catch (error) {
-         return response.status(500).json({
-            sucesso: false,
-            pagamento: 'erro na lista de pagamento',
-            dados: error.message
-         })
-      }
-   },
-
-
-   async apagarContatos(request, response) {
-      try {
-         return response.status(200).json({
-
-            sucesso: true,
-            pagamento: 'apagar pagamento',
-            dados: null
-
-         })
-      }
-      catch (error) {
-         return response.status(500).json({
-            sucesso: false,
-            pagamento: 'erro na lista de pagamento',
-            dados: error.message
-         })
-      }
-   },
-}
+    async apagarPagamento(request, response) {
+        try {
+            return response.status(200).json({
+                sucesso: true,
+                mensagem: 'Pagamento apagado com sucesso',
+                dados: null
+            });
+        } catch (error) {
+            return response.status(500).json({
+                sucesso: false,
+                mensagem: 'Erro ao apagar pagamento',
+                dados: error.message
+            });
+        }
+    },
+};

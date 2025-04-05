@@ -1,12 +1,12 @@
 const db = require('../database/connection');
 
 module.exports = {
-   async listarContatos(request, response) {
+   async listarMensagem(request, response) {
       try {
          return response.status(200).json({
 
             sucesso: true,
-            mensagem: 'lista de mensagens',
+            mensagem: 'lista de mensagem',
             dados: null
 
          })
@@ -14,19 +14,21 @@ module.exports = {
       catch (error) {
          return response.status(500).json({
             sucesso: false,
-            mensagem: 'erro na lista de mensagem',
+            mensagem: 'erro na listagem de mensagem',
             dados: error.message
          })
       }
    },
 
 
-   async cadastarmensagem(request, response) {
+
+
+   async cadastrarMensagem(request, response) {
       try {
          return response.status(200).json({
 
             sucesso: true,
-            mensagem: 'cadastrar mensagem',
+            mensagem: 'cadastro de mensagem',
             dados: null
 
          })
@@ -34,14 +36,16 @@ module.exports = {
       catch (error) {
          return response.status(500).json({
             sucesso: false,
-            mensagem: 'erro na lista de mensagens',
+            mensagem: 'erro no cadastro de mensagem',
             dados: error.message
          })
       }
    },
 
 
-   async editarmensagem(request, response) {
+
+
+   async editarMensagem(request, response) {
       try {
          return response.status(200).json({
 
@@ -54,14 +58,16 @@ module.exports = {
       catch (error) {
          return response.status(500).json({
             sucesso: false,
-            mensagem: 'erro na lista de mensagens',
+            mensagem: 'erro ao editar mensagem',
             dados: error.message
          })
       }
    },
 
 
-   async apagarContatos(request, response) {
+
+
+   async apagarMensagem(request, response) {
       try {
          return response.status(200).json({
 
@@ -74,7 +80,7 @@ module.exports = {
       catch (error) {
          return response.status(500).json({
             sucesso: false,
-            mensagem: 'erro na lista de mensagens',
+            mensagem: 'erro ao apagar mensagem',
             dados: error.message
          })
       }
