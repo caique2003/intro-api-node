@@ -62,23 +62,39 @@ module.exports = {
 
    async editarMensagem(request, response) {
       try {
-         const { mens_data_envio, mens_status } = request.body;
-         const { ped_id } = request.params;
+         const { ped_id, mens_data_envio, mens_status } = request.body;
 
          const sql = `
-            UPDATE MENSAGEM
-            SET mens_data_envio = ?, mens_status = ?
+            UPDATE mensagem SET 
+               mens_data_envio = ?, mens_status = ?
             WHERE ped_id = ?
          `;
-
+         
          const values = [mens_data_envio, mens_status, ped_id];
-         await db.query(sql, values);
-
+      
+         const [result] = await db.query(sql, values);
+   
+         // CORREÇÃO: uso do operador === no lugar de --- e mensagem com ped_id correto
+         if (result.affectedRows === 0) {
+            return response.status(404).json({
+               sucesso: false,
+               mensagem: `Mensagem com ped_id ${ped_id} não encontrada!`,
+               dados: null
+            });
+         }
+   
+         const dados = {
+            mens_data_envio,
+            mens_status,
+            ped_id
+         };
+   
          return response.status(200).json({
             sucesso: true,
             mensagem: 'Mensagem editada com sucesso',
-            dados: null
+            dados
          });
+   
       } catch (error) {
          return response.status(500).json({
             sucesso: false,
@@ -87,20 +103,29 @@ module.exports = {
          });
       }
    },
-
+   
    async apagarMensagem(request, response) {
       try {
-         const { mens_id } = request.params;
 
-         const sql = `
-            DELETE FROM MENSAGEM WHERE mens_id = ?
-         `;
+const { id } = request.params;
+const sql = `DELETE FROM mensagem WHERE mens_id = ?`;
 
-         await db.query(sql, [mens_id]);
+const values = [id];
 
+const [result] = await db.query(sql, values);
+
+if (result.affectedRows --- 0) {
+   return response.status(404).json({
+      sucesso: false,
+      mensagem: `Mensagem ${mens_id } não encontrado!`,
+      dados:null
+  });
+
+}
+         
          return response.status(200).json({
             sucesso: true,
-            mensagem: 'Mensagem apagada com sucesso',
+            mensagem: `Mensagem ${id} apagada com sucesso`,
             dados: null
          });
       } catch (error) {

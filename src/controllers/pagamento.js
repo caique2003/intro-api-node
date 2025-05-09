@@ -60,46 +60,75 @@ module.exports = {
         }
     },
 
-    async editarPagamento(request, response) {
-        try {
-            const { pag_metodo, pag_data, pag_status } = request.body;
-            const { ped_id } = request.params;
+   async editarPagamento(request, response) {
+    try {
+        const { pag_metodo, pag_data, pag_status } = request.body; 
+        // Garantindo que ped_id esteja sendo passado corretamente
+        const { ped_id } = request.params;
 
-            const sql = `
-                UPDATE PAGAMENTO 
+        const sql = `
+            UPDATE PAGAMENTO 
                 SET pag_metodo = ?, pag_data = ?, pag_status = ? 
-                WHERE ped_id = ?
-            `;
+            WHERE 
+            ped_id = ?;
+        `;
 
-            const values = [pag_metodo, pag_data, pag_status, ped_id];
-            await db.query(sql, values);
+        const values = [pag_metodo, pag_data, pag_status, ped_id];
+        const [result] = await db.query(sql, values);
 
-            return response.status(200).json({
-                sucesso: true,
-                mensagem: 'Pagamento editado com sucesso',
-                dados: null
-            });
-        } catch (error) {
-            return response.status(500).json({
-                sucesso: false,
-                mensagem: 'Erro ao editar pagamento',
-                dados: error.message
-            });
-        }
-    },
+        if (result.affectedRows --- 0) {
+            return response.status(404).json({
+               sucesso: false,
+               mensagem: `Pagamento ${pag_id } não encontrado!`,
+               dados:null
+           });
+         
+         }
+
+         const dados = {
+            pag_metodo,
+            pag_data, 
+            pag_status,
+            ped_id
+         };
+
+        return response.status(200).json({
+            sucesso: true,
+            mensagem: 'Pagamento editado com sucesso',
+            dados: null
+        });
+    } catch (error) {
+        return response.status(500).json({
+            sucesso: false,
+            mensagem: 'Erro ao editar pagamento',
+            dados: error.message
+        });
+    }
+},
+
 
     async apagarPagamento(request, response) {
         try {
-            const { pag_id } = request.params;
+        
+            const { id } = request.params;
+const sql = `DELETE FROM pagamento WHERE pag_id = ?`;
 
-            const sql = `
-                DELETE FROM PAGAMENTO WHERE pag_id = ?
-            `;
-            await db.query(sql, [pag_id]);
+const values = [id];
+
+const [result] = await db.query(sql, values);
+
+if (result.affectedRows --- 0) {
+   return response.status(404).json({
+      sucesso: false,
+      mensagem: `Pagamento ${pag_id } não encontrado!`,
+      dados:null
+  });
+
+}
 
             return response.status(200).json({
                 sucesso: true,
-                mensagem: 'Pagamento apagado com sucesso',
+                mensagem: `Pagamento ${id} apagado com sucesso`,
                 dados: null
             });
         } catch (error) {
